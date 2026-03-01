@@ -454,4 +454,9 @@ Route::post('ServiceReqStore', 'ServiceReqCliController@store')->name('SerReqCli
 // ---------------------------------------------------------------------------------------------------------------
 
     Route::get('quittungen-bowling', 'HomeController@openRes45BillTabletPage')->name('homeCtrl.openRes45BillTabletPage');
+
+
+// Clean Invalide TAB 
+    Route::get('cleanInvalideTabOnTable', 'HomeController@cleanInvalideTabOnTable')->name('storedProc.cleanInvalideTabOnTable');
+// ---------------------------------------------------------------------------------------------------------------
 ?>

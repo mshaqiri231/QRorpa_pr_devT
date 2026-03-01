@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Orders;
 use App\Restorant;
 use App\Takeaway;
+use App\TableQrcode;
+use App\TabOrder;
+use App\logTabAutoRemove;
 use Auth;
 class HomeController extends Controller
 {
@@ -107,6 +110,27 @@ class HomeController extends Controller
             }
         }else{
             echo 'You do not have access to use this API (your ip: '.$ip.')';
+        }
+    }
+
+    public function cleanInvalideTabOnTable(Request $req){
+        if(isset($_GET['sHash']) && $_GET['sHash'] == '4f9c2a7d8e1b6c3a9d5e7f0b2c4a8e6d1c3f9b7a2d5e8c1f6a4b9d2e7c5f0a1'){
+            foreach(TableQrcode::where('kaTab','!=','0')->get() as $actTableOne){
+                $otherOrdersOnThisTable = TabOrder::where([['toRes',$actTableOne->Restaurant],['tableNr',$actTableOne->tableNr],['tabCode','!=',$actTableOne->kaTab]])->get();
+                foreach($otherOrdersOnThisTable as $otherOrdersOnThisTableOne){
+                    if($otherOrdersOnThisTableOne->tabCode != 0){
+
+                        $newLog = new logTabAutoRemove();
+                        $newLog->toRes = $otherOrdersOnThisTableOne->toRes ;
+                        $newLog->tableNr = $otherOrdersOnThisTableOne->tableNr;
+                        $newLog->tabId = $otherOrdersOnThisTableOne->id;
+                        $newLog->permb = 'InvalideTAB--TabC:'.$otherOrdersOnThisTableOne->tabCode.'--ProdId:'.$otherOrdersOnThisTableOne->prodId.'--OrdEmri:'.$otherOrdersOnThisTableOne->OrderSasia.'x '.$otherOrdersOnThisTableOne->OrderEmri.'--Time'.$otherOrdersOnThisTableOne->created_at;
+                        $newLog->save();
+
+                        $otherOrdersOnThisTableOne->delete();
+                    }
+                }
+            }
         }
     }
 }
