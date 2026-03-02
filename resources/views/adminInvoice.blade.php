@@ -269,6 +269,9 @@ use App\payTecTransactionLog;
                                 <strong>--- ---</strong>
                                 @endif
                             </td>
+                            <td>
+                                         <pre style="font-size:14px; line-height:1.5; text-align: left !important; margin:0px; padding:0px 15px 0px 15px; white-space: pre-wrap; word-wrap: break-word;">{{ preg_replace('/^\x{FEFF}|\x{200B}|\x{00A0}|\t/u', '',$items->resComment) }}</pre>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
@@ -741,8 +744,8 @@ use App\payTecTransactionLog;
                 <tr class="total" style="margin-bottom:0px;">
                     <td colspan="2" style="text-align: center; margin:0px;"><strong>{{$orderPOSData->DisplayName}} contactless</strong></td>
                 </tr>
-                <tr class="total" style="margin-bottom:0px;">
-                    <td colspan="2" style="text-align: center; margin:0px;"><strong>{{$orderPOSData->AppPANPrtCardholder}}</strong></td>
+                <!-- <tr class="total" style="margin-bottom:0px;">
+                    <td colspan="2" style="text-align: center; margin:0px;"><strong>{{$orderPOSData->AppPANPrtCardholder}}</strong></td> -->
                 </tr>
                 <tr class="total" style="margin-bottom:0px;">
                     <td><strong>{{$TrxDate[4]}}{{$TrxDate[5]}}.{{$TrxDate[2]}}{{$TrxDate[3]}}.{{$TrxDate[1]}}{{$TrxDate[1]}}</strong></td>
