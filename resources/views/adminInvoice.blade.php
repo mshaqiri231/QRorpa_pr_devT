@@ -269,8 +269,10 @@ use App\payTecTransactionLog;
                                 <strong>--- ---</strong>
                                 @endif
                             </td>
-                            <td>
-                                         <pre style="font-size:14px; line-height:1.5; text-align: left !important; margin:0px; padding:0px 15px 0px 15px; white-space: pre-wrap; word-wrap: break-word;">{{ preg_replace('/^\x{FEFF}|\x{200B}|\x{00A0}|\t/u', '',$items->resComment) }}</pre>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="margin:0px; padding:0px;">
+                                <pre style="font-size:14px; line-height:1.5; text-align: left !important; margin:0px; padding:0px 15px 0px 15px; white-space: pre-wrap; word-wrap: break-word;">{{ preg_replace('/^\x{FEFF}|\x{200B}|\x{00A0}|\t/u', '',$items->resComment) }}</pre>
                             </td>
                         </tr>
                         <tr>
